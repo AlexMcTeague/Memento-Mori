@@ -157,8 +157,6 @@ vite.config.ts.timestamp-*
 *.sw?
 
 # Express
-package-lock.json
 npm-shrinkwrap.json
 *.gz
-yarn.lock
 benchmarks/graphs
