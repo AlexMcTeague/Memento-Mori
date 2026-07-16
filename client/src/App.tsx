@@ -1,32 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import Logo from '/favicon.svg'
+import { BookUser, FileCodeCorner } from 'lucide-react';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+        <img src={Logo} className="logo" />
         <div>
-          <h1>Get started</h1>
+          <h1>Memento Mori</h1>
           <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+            <em>Use the looming spectre of Doom to stay motivated</em>
+            <br />Take advantage of every moment, stop procrastinating, and focus on what’s important
           </p>
         </div>
         <button
           type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          className="counter" // TODO: Update this to a link to the planner page
         >
-          Count is {count}
+          Remember that you must die
         </button>
       </section>
 
@@ -34,35 +26,12 @@ function App() {
 
       <section id="next-steps">
         <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
+          <FileCodeCorner />
           <h2>Documentation</h2>
-          <p>Your questions, answered</p>
+          <p>Learn more about Memento Mori and its creator</p>
           <ul>
             <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
+              <a href="https://github.com/AlexMcTeague/Memento-Mori" target="_blank">
                 <svg
                   className="button-icon"
                   role="presentation"
@@ -70,43 +39,13 @@ function App() {
                 >
                   <use href="/icons.svg#github-icon"></use>
                 </svg>
-                GitHub
+                This Site's Repository
               </a>
             </li>
             <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
+              <a href="https://alexmcteague.github.io/" target="_blank">
+                <BookUser />
+                Alex McTeague's Portfolio
               </a>
             </li>
           </ul>
