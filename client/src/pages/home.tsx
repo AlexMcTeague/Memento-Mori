@@ -1,12 +1,13 @@
-import './App.css'
-import Logo from '/favicon.svg'
+import '../css/home.css';
+import Logo from '/favicon.svg';
+import { Link } from 'react-router';
 import { BookUser, FileCodeCorner } from 'lucide-react';
 
 function App() {
   return (
     <>
       <section id="center">
-        <img src={Logo} className="logo" />
+        <img src={Logo} className="logo" /> {/* TODO: Create a light-mode variant logo */}
         <div>
           <h1>Memento Mori</h1>
           <p>
@@ -14,12 +15,9 @@ function App() {
             <br />Take advantage of every moment, stop procrastinating, and focus on what’s important
           </p>
         </div>
-        <button
-          type="button"
-          className="counter" // TODO: Update this to a link to the planner page
-        >
+        <Link to="/List" className="btn-link">
           Remember that you must die
-        </button>
+        </Link>
       </section>
 
       <div className="ticks"></div>
