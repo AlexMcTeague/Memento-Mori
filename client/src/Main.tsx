@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import './css/index.css';
-import Home from './pages/home.tsx';
-import List from './pages/list.tsx';
+import Home from './pages/Home.tsx';
+import List from './pages/List.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
