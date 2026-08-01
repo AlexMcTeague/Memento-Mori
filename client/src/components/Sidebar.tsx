@@ -1,6 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { Menu, X } from 'lucide-react';
+import { SidebarData } from './SidebarData.tsx';
+import '../css/sidebar.css';
 
 function Sidebar() {
     const [sidebar, setSidebar] = useState(false);
@@ -15,12 +17,22 @@ function Sidebar() {
                 </Link>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                <ul className="nav-menu-items">
+                <ul className="nav-menu-items" onClick={showSidebar}>
                     <li className="navbar-toggle">
                         <Link to="#" className="menu-bars">
                             <X />
                         </Link>
                     </li>
+                    { SidebarData.map((item, index) => {
+                        return (
+                            <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    <item.icon />
+                                    <span>{item.title}</span>
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
         </>
