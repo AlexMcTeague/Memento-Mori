@@ -15,13 +15,12 @@ const app = express();
 app.use(express.json());
 
 // TODO: Configure corsOptions to only allow requests from the frontend (temporarily disabled during development)
-// const corsOptions = { origin: `http://localhost:${process.env.FRONTEND_PORT}` }
-const corsOptions = {  }
-app.use(cors());
+const frontendPort = process.env.FRONTEND_PORT || 5173;
+const corsOptions = { origin: `http://localhost:${frontendPort}` }
 app.use(cors(corsOptions));
 
 // Read/write data to storage file
-const STORAGE_PATH = path.resolve(process.cwd(), "../data/storage.json");
+const STORAGE_PATH = path.resolve(process.cwd(), "./data/storage.json");
 const readData = () => {
     if (!fs.existsSync(STORAGE_PATH)) {
         return [];
@@ -32,6 +31,25 @@ const readData = () => {
 const writeData = (data: any) => {
     fs.writeFileSync(STORAGE_PATH, JSON.stringify(data, null, 2));
 }
+
+// API Endpoints
+// POST
+app.post("/api/items", (req, res) => {
+    try {
+        const data = readData();
+        const newItem = {
+            id: Date.now().toString(), // Unique ID based on timestamp
+            createdAt: new Date().toISOString(),
+            body: req.body
+        };
+        data.push(newItem);
+        writeData(data);
+        res.status(201).json(newItem);
+    } catch (error) {
+        console.error("Error writing to storage:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 // Start the server
 app.listen(port, () => {
