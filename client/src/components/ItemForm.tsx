@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import '../css/form.css';
 
+// Define the form fields and their types (for Typescript)
 type FormFields = {
     Title: string;
     Category: string;
@@ -10,6 +11,7 @@ type FormFields = {
 }
 
 function ItemForm() {
+    // React Hook Form setup
     const {
         register, 
         handleSubmit,
@@ -20,17 +22,34 @@ function ItemForm() {
             Category: ""
         }
     });
+
+    // Backend URL setup
+    const backendPort = import.meta.env.BACKEND_PORT || 8080;
+    const backendUrl = `http://localhost:${backendPort}/api/items`;
     
+    // Handle form submission
     const onSubmit = async (data: FormFields) => {
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate a network request
-            throw new Error();
-            console.log(data);
+            const response = await fetch(backendUrl, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("Form submitted successfully:", result);
         } catch (error) {
             setError("root", { type: "manual", message: "Error submitting form"});
         }
     }
   
+    // Render the form
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
