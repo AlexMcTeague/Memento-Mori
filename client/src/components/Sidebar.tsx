@@ -1,8 +1,22 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { Menu, X } from 'lucide-react';
-import { SidebarData } from './SidebarData.tsx';
+import { House, List, Menu, X } from 'lucide-react';
 import '../css/sidebar.css';
+
+const SidebarData = [
+    {
+        title: 'Home',
+        path: '/',
+        icon: House,
+        cName: 'nav-text'
+    },
+    {
+        title: 'List',
+        path: '/list',
+        icon: List,
+        cName: 'nav-text'
+    }
+];
 
 function Sidebar() {
     const [sidebar, setSidebar] = useState(false);
