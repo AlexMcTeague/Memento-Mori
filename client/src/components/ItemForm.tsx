@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import '../css/form.css';
 
 type FormFields = {
     Title: string;
@@ -17,35 +18,63 @@ function ItemForm() {
   
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-            {...register("Title", {
-                required: "Title is required", 
-                maxLength: { value: 50, message: "Maximum 50 characters allowed" }
-            })}
-            type="text"
-            placeholder="Title"
-        />
-        {errors.Title && <span className="error-msg">{errors.Title.message}</span>}
+            <div>
+                <label htmlFor="title-field">Title: </label>
+                <input
+                    id="title-field"
+                    {...register("Title", {
+                        required: "Title is required", 
+                        maxLength: { value: 50, message: "Maximum 50 characters allowed" },
+                        /* Example of custom validation
+                        validate: (value) => {
+                            if (!value.includes("@")) {
+                                return "Email must contain an '@' symbol";
+                            }
+                            return true;
+                        }
+                        */
+                    })}
+                    type="text"
+                    placeholder="Title"
+                />
+                {errors.Title && <span className="error-msg">{errors.Title.message}</span>}
+            </div>
 
-        <select {...register("Category")}>
-            <option value="Health">Health</option>
-            <option value="Home">Home</option>
-            <option value="Job">Job</option>
-            <option value="Groceries">Groceries</option>
-            <option value="Fun">Fun</option>
-        </select>
-        
-        <textarea {...register("Description")} />
-        
-        <input {...register("DueDate")} type="datetime-local" />
+            <div>
+                <label htmlFor="category-field">Category: </label>
+                <select {...register("Category")} id="category-field">
+                    <option value="Health">Health</option>
+                    <option value="Home">Home</option>
+                    <option value="Job">Job</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Fun">Fun</option>
+                </select>
+                {errors.Category && <span className="error-msg">{errors.Category.message}</span>}
+            </div>
 
-        <input {...register("Difficulty")} type="radio" value="1" />
-        <input {...register("Difficulty")} type="radio" value="2" />
-        <input {...register("Difficulty")} type="radio" value="3" />
-        <input {...register("Difficulty")} type="radio" value="4" />
-        <input {...register("Difficulty")} type="radio" value="5" />
+            <div>
+                <label htmlFor="description-field">Description: </label>
+                <textarea {...register("Description")} id="description-field" placeholder="Description" />
+                {errors.Description && <span className="error-msg">{errors.Description.message}</span>}
+            </div>
 
-        <input type="submit" />
+            <div>
+                <label htmlFor="due-date-field">Due Date: </label>
+                <input {...register("DueDate")} id="due-date-field" type="datetime-local" />
+                {errors.DueDate && <span className="error-msg">{errors.DueDate.message}</span>}
+            </div>
+
+            <div>
+                <label htmlFor="difficulty-field">Difficulty: </label> {/* TODO: Figure out labeling for radio buttons*/}
+                <input {...register("Difficulty")} type="radio" value="1" />
+                <input {...register("Difficulty")} type="radio" value="2" />
+                <input {...register("Difficulty")} type="radio" value="3" />
+                <input {...register("Difficulty")} type="radio" value="4" />
+                <input {...register("Difficulty")} type="radio" value="5" />
+                {errors.Difficulty && <span className="error-msg">{errors.Difficulty.message}</span>}
+            </div>
+
+            <input type="submit" />
         </form>
     );
 }
