@@ -1,13 +1,32 @@
 import { useForm } from 'react-hook-form';
 
-function ItemForm() {
-  const { register, handleSubmit } = useForm();
+type FormFields = {
+    Title: string;
+    Category: string;
+    Description: string;
+    DueDate: Date;
+    Difficulty: number;
+}
 
-  const onSubmit = (data: any) => console.log(data);
+function ItemForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormFields>();
+  
+  const onSubmit = (data: FormFields) => {
+    console.log(data);
+  }
   
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("Title", {required: true})} type="text" placeholder="Title" />
+      <input
+        {...register("Title", {
+            required: "Title is required", 
+            maxLength: { value: 50, message: "Maximum 50 characters allowed" }
+        })}
+        type="text"
+        placeholder="Title"
+      />
+      {errors.Title && <span className="error-msg">{errors.Title.message}</span>}
+
       <select {...register("Category")}>
         <option value="Health">Health</option>
         <option value="Home">Home</option>
@@ -15,7 +34,9 @@ function ItemForm() {
         <option value="Groceries">Groceries</option>
         <option value="Fun">Fun</option>
       </select>
+      
       <textarea {...register("Description")} />
+     
       <input {...register("DueDate")} type="datetime-local" />
 
       <input {...register("Difficulty")} type="radio" value="1" />
