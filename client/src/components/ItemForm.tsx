@@ -10,14 +10,25 @@ type FormFields = {
 }
 
 function ItemForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({
+    const {
+        register, 
+        handleSubmit,
+        setError,
+        formState: { errors, isSubmitting } 
+    } = useForm<FormFields>({
         defaultValues: {
             Category: ""
         }
     });
     
-    const onSubmit = (data: FormFields) => {
-        console.log(data);
+    const onSubmit = async (data: FormFields) => {
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate a network request
+            throw new Error();
+            console.log(data);
+        } catch (error) {
+            setError("root", { type: "manual", message: "Error submitting form"});
+        }
     }
   
     return (
@@ -79,7 +90,13 @@ function ItemForm() {
                 {errors.Difficulty && <span className="error-msg">{errors.Difficulty.message}</span>}
             </div>
 
-            <input type="submit" />
+            <button disabled={isSubmitting} type="submit">
+                {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
+            
+            <div>
+                {errors.root && <span className="error-msg">{errors.root.message}</span>}
+            </div>
         </form>
     );
 }
