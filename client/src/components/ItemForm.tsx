@@ -10,7 +10,11 @@ type FormFields = {
 }
 
 function ItemForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormFields>();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({
+        defaultValues: {
+            Category: ""
+        }
+    });
     
     const onSubmit = (data: FormFields) => {
         console.log(data);
@@ -43,6 +47,7 @@ function ItemForm() {
             <div>
                 <label htmlFor="category-field">Category: </label>
                 <select {...register("Category")} id="category-field">
+                    <option value="">-- Select a Category --</option>
                     <option value="Health">Health</option>
                     <option value="Home">Home</option>
                     <option value="Job">Job</option>
