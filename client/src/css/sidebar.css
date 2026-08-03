@@ -12,6 +12,7 @@
 }
 
 .menu-bars {
+    color: var(--text-h);
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
