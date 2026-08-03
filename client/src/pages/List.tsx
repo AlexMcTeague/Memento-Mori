@@ -1,7 +1,9 @@
+import ItemForm from "../components/ItemForm";
+
 function App() {
     return (
         <>
-            
+            <ItemForm />
         </>
     )
 }
