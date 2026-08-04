@@ -10,11 +10,11 @@ import dotenv from "dotenv";
 dotenv.config({ path: path.resolve(process.cwd(), "../.env") });
 const port = process.env.BACKEND_PORT || 8080;
 
-// Configure Express and CORS
+// Configure Express
 const app = express();
 app.use(express.json());
 
-// TODO: Configure corsOptions to only allow requests from the frontend (temporarily disabled during development)
+// Configure CORS
 const frontendPort = process.env.FRONTEND_PORT || 5173;
 const corsOptions = { origin: `http://localhost:${frontendPort}` }
 app.use(cors(corsOptions));
