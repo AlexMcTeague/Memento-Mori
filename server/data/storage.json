@@ -8,7 +8,7 @@
         "Title": "SAMPLE DATA",
         "Description": "This is just for testing.",
         "DueDate": "2026-08-06T18:30",
-        "Difficulty": "3"
+        "Doom": "3"
       }
     },
     {
@@ -19,7 +19,7 @@
         "Title": "Test 2",
         "Description": "aaaaaah!!!",
         "DueDate": "",
-        "Difficulty": "2"
+        "Doom": "2"
       }
     },
     {
@@ -30,7 +30,7 @@
         "Title": "A",
         "Description": "",
         "DueDate": "",
-        "Difficulty": null
+        "Doom": null
       }
     },
     {
@@ -41,7 +41,7 @@
         "Title": "Q",
         "Description": "",
         "DueDate": "",
-        "Difficulty": null
+        "Doom": null
       }
     }
   ]

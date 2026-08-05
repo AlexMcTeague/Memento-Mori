@@ -1,14 +1,14 @@
-import ItemForm from "../components/ItemForm";
+import TaskForm from "../components/TaskForm";
 import TaskGrid from '../components/TaskGrid';
 
 function App() {
     return (
         <>
             <h1>Task List</h1>
-            <button className="new-item-button">New Item</button>
+            <button className="new-task-button">New Task</button>
             <TaskGrid />
             <div className="form-container">
-                <ItemForm />
+                <TaskForm />
             </div>
         </>
     )

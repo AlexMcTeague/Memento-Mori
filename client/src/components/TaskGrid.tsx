@@ -8,7 +8,7 @@ interface IRow {
     title: string;
     category: string;
     dueDate: Date | null;
-    difficulty: number;
+    doom: number;
 }
 
 function TaskGrid() {
@@ -16,7 +16,7 @@ function TaskGrid() {
         { headerName: "Title", field: "title" },
         { headerName: "Category", field: "category" },
         { headerName: "Due Date", field: "dueDate" },
-        { headerName: "Difficulty", field: "difficulty" }
+        { headerName: "Doom", field: "doom" }
     ]);
 
     const defaultColDef: ColDef = {
@@ -39,7 +39,7 @@ function TaskGrid() {
     async function refreshGrid() {
         // Backend URL setup
         const backendPort = import.meta.env.BACKEND_PORT || 8080;
-        const backendUrl = `http://localhost:${backendPort}/api/items`;
+        const backendUrl = `http://localhost:${backendPort}/api/tasks`;
 
         try {
             const response = await fetch(backendUrl, {
@@ -65,7 +65,7 @@ function TaskGrid() {
                         title: task.body?.Title ?? "",
                         category: task.body?.Category ?? "",
                         dueDate: task.body?.DueDate ? new Date(task.body.DueDate) : null,
-                        difficulty: Number(task.body?.Difficulty ?? 0)
+                        doom: Number(task.body?.Doom ?? 0)
                     });
                 }
             }

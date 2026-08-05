@@ -8,11 +8,11 @@ type FormFields = {
     Category: string;
     Description: string;
     DueDate: Date;
-    Difficulty: number;
+    Doom: number;
 }
 
-function ItemForm() {
-    const [isVisible, setIsVisible] = useState(false); // TODO: Enable form when New Item button is clicked. Hide when Cancel is clicked. Restrict New Item button when form is visible
+function TaskForm() {
+    const [isVisible, setIsVisible] = useState(false); // TODO: Enable form when New Task button is clicked. Hide when Cancel is clicked. Restrict New Task button when form is visible
 
     // React Hook Form setup
     const {
@@ -29,7 +29,7 @@ function ItemForm() {
 
     // Backend URL setup
     const backendPort = import.meta.env.BACKEND_PORT || 8080;
-    const backendUrl = `http://localhost:${backendPort}/api/items`;
+    const backendUrl = `http://localhost:${backendPort}/api/tasks`;
     
     // Handle form submission
     const onSubmit = async (data: FormFields) => {
@@ -114,13 +114,13 @@ function ItemForm() {
 
             <div>
                 { /* TODO: Allow user to "unselect" a radio button */ }
-                <label htmlFor="difficulty-field">Difficulty: </label> {/* TODO: Figure out labeling for radio buttons*/}
-                <input {...register("Difficulty")} type="radio" value="1" />
-                <input {...register("Difficulty")} type="radio" value="2" />
-                <input {...register("Difficulty")} type="radio" value="3" />
-                <input {...register("Difficulty")} type="radio" value="4" />
-                <input {...register("Difficulty")} type="radio" value="5" />
-                {errors.Difficulty && <span className="error-msg">{errors.Difficulty.message}</span>}
+                <label htmlFor="doom-field">Doom: </label> {/* TODO: Figure out labeling for radio buttons*/}
+                <input {...register("Doom")} type="radio" value="1" />
+                <input {...register("Doom")} type="radio" value="2" />
+                <input {...register("Doom")} type="radio" value="3" />
+                <input {...register("Doom")} type="radio" value="4" />
+                <input {...register("Doom")} type="radio" value="5" />
+                {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
             </div>
 
             <button disabled={isSubmitting} type="submit">
@@ -134,4 +134,4 @@ function ItemForm() {
     );
 }
 
-export default ItemForm;
+export default TaskForm;

@@ -37,7 +37,7 @@ const writeData = (data: any) => {
 
 // API Endpoints
 // GET
-app.get("/api/items", (req, res) => {
+app.get("/api/tasks", (req, res) => {
     try {
         const data = readData();
 
@@ -55,17 +55,17 @@ app.get("/api/items", (req, res) => {
 });
 
 // POST
-app.post("/api/items", (req, res) => {
+app.post("/api/tasks", (req, res) => {
     try {
         const data = readData();
-        const newItem = {
+        const newTask = {
             id: Date.now().toString(), // Unique ID based on timestamp
             createdAt: new Date().toISOString(),
             body: req.body
         };
-        data.tasks.push(newItem);
+        data.tasks.push(newTask);
         writeData(data);
-        res.status(201).json(newItem);
+        res.status(201).json(newTask);
     } catch (error) {
         console.error("Error writing to storage:", error);
         res.status(500).json({ error: "Internal Server Error" });
