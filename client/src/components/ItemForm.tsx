@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import '../css/form.css';
+import { useState } from 'react';
 
 // Define the form fields and their types (for Typescript)
 type FormFields = {
@@ -11,10 +12,13 @@ type FormFields = {
 }
 
 function ItemForm() {
+    const [isVisible, setIsVisible] = useState(false); // TODO: Enable form when New Item button is clicked. Hide when Cancel is clicked. Restrict New Item button when form is visible
+
     // React Hook Form setup
     const {
         register, 
         handleSubmit,
+        reset,
         setError,
         formState: { errors, isSubmitting } 
     } = useForm<FormFields>({
@@ -44,9 +48,18 @@ function ItemForm() {
 
             const result = await response.json();
             console.log("Form submitted successfully:", result);
+
+            // Reset the form
+            setIsVisible(false);
+            reset();
         } catch (error) {
             setError("root", { type: "manual", message: "Error submitting form"});
         }
+    }
+
+    // If the form is not visible, return null to hide it
+    if (!isVisible) {
+        return null;
     }
   
     // Render the form
