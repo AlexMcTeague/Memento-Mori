@@ -23,8 +23,11 @@ app.use(cors(corsOptions));
 const STORAGE_PATH = path.resolve(process.cwd(), "./data/storage.json");
 const readData = () => {
     if (!fs.existsSync(STORAGE_PATH)) {
-        return [];
+        const defaultData = { tasks: [] };
+        writeData(defaultData);
+        return defaultData;
     }
+
     const rawData = fs.readFileSync(STORAGE_PATH);
     return JSON.parse(rawData.toString());
 }
@@ -33,6 +36,24 @@ const writeData = (data: any) => {
 }
 
 // API Endpoints
+// GET
+app.get("/api/items", (req, res) => {
+    try {
+        const data = readData();
+
+        if (!data.tasks || !Array.isArray(data.tasks)) {
+            console.log("Could not read Tasks from storage. Fix or reset storage.json to continue.");
+            res.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+
+        res.status(200).json(data.tasks);
+    } catch (error) {
+        console.error("Error reading from storage:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 // POST
 app.post("/api/items", (req, res) => {
     try {
@@ -42,7 +63,7 @@ app.post("/api/items", (req, res) => {
             createdAt: new Date().toISOString(),
             body: req.body
         };
-        data.push(newItem);
+        data.tasks.push(newItem);
         writeData(data);
         res.status(201).json(newItem);
     } catch (error) {

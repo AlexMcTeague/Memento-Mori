@@ -113,6 +113,7 @@ function ItemForm() {
             </div>
 
             <div>
+                { /* TODO: Allow user to "unselect" a radio button */ }
                 <label htmlFor="difficulty-field">Difficulty: </label> {/* TODO: Figure out labeling for radio buttons*/}
                 <input {...register("Difficulty")} type="radio" value="1" />
                 <input {...register("Difficulty")} type="radio" value="2" />

@@ -1,13 +1,48 @@
-[
-  {
-    "id": "1785795977481",
-    "createdAt": "2026-08-03T22:26:17.481Z",
-    "body": {
-      "Category": "Fun",
-      "Title": "SAMPLE DATA",
-      "Description": "Test Description",
-      "DueDate": "2026-09-01T18:24",
-      "Difficulty": "3"
+{
+  "tasks": [
+    {
+      "id": "1785969045333",
+      "createdAt": "2026-08-05T22:30:45.333Z",
+      "body": {
+        "Category": "Fun",
+        "Title": "SAMPLE DATA",
+        "Description": "This is just for testing.",
+        "DueDate": "2026-08-06T18:30",
+        "Difficulty": "3"
+      }
+    },
+    {
+      "id": "1785969542022",
+      "createdAt": "2026-08-05T22:39:02.022Z",
+      "body": {
+        "Category": "Health",
+        "Title": "Test 2",
+        "Description": "aaaaaah!!!",
+        "DueDate": "",
+        "Difficulty": "2"
+      }
+    },
+    {
+      "id": "1785969556058",
+      "createdAt": "2026-08-05T22:39:16.058Z",
+      "body": {
+        "Category": "Health",
+        "Title": "A",
+        "Description": "",
+        "DueDate": "",
+        "Difficulty": null
+      }
+    },
+    {
+      "id": "1785969751323",
+      "createdAt": "2026-08-05T22:42:31.323Z",
+      "body": {
+        "Category": "",
+        "Title": "Q",
+        "Description": "",
+        "DueDate": "",
+        "Difficulty": null
+      }
     }
-  }
-]
+  ]
+}
