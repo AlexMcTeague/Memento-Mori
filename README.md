@@ -6,6 +6,7 @@ A macabre task management and planning website, motivating you by serving as a r
 1. Clone this repository and open the root directory in your editor of choice.
 1. (Optional, see Configuration below) Create a .env to configure custom frontend/backend ports.
 1. Open a Terminal in the root directory (`` Ctrl+` `` in VSCode).
+1. Verify all dependencies are installed by running `npm run install-deps`
 1. Start the backend using `npm run dev-backend`.
 1. Wait for the backend to fully start before continuing (this should take a few seconds at most).
 1. Open a second Terminal in the root directory (in VSCode, use either the 'Split Terminal' or 'New Terminal' button).

@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "install-deps": "npm install && npm install --prefix client && npm install --prefix server",
     "dev-client": "npm run dev --prefix client",
     "dev-frontend": "npm run dev-client",
     "dev-server": "npm run dev --prefix server",
