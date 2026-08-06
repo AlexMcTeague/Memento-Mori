@@ -17,7 +17,7 @@ function App() {
     return (
         <>
             <h1>Task List</h1>
-            <button className="new-task-button" onClick={openNewForm}>New Task</button> { /* TODO: Restrict New Task button when form is visible */ }
+            <button className="new-task-button" disabled={isFormVisible} onClick={openNewForm}>{isFormVisible ? "Editing New Task" : "New Task"}</button>
 
             <TaskGrid />
 
