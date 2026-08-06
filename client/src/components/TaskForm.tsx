@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import '../css/form.css';
-import { useState } from 'react';
 
 // Define the form fields and their types (for Typescript)
 type FormFields = {
@@ -11,8 +10,12 @@ type FormFields = {
     Doom: number;
 }
 
-function TaskForm() {
-    const [isVisible, setIsVisible] = useState(false); // TODO: Enable form when New Task button is clicked. Hide when Cancel is clicked. Restrict New Task button when form is visible
+type TaskFormProps = {
+    isVisible: boolean;
+    closeForm: () => void;
+}
+
+function TaskForm({ isVisible, closeForm }: TaskFormProps) {
 
     // React Hook Form setup
     const {
@@ -50,8 +53,8 @@ function TaskForm() {
             console.log("Form submitted successfully:", result);
 
             // Reset the form
-            setIsVisible(false);
             reset();
+            closeForm(); // Calls the parent's closeForm since the method was passed as an arg
         } catch (error) {
             setError("root", { type: "manual", message: "Error submitting form"});
         }
@@ -123,6 +126,7 @@ function TaskForm() {
                 {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
             </div>
 
+            <button type="button" onClick={() => {reset(); closeForm();}}>Cancel</button>
             <button disabled={isSubmitting} type="submit">
                 {isSubmitting ? "Submitting..." : "Submit"}
             </button>
