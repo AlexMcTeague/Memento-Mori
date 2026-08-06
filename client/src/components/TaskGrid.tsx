@@ -12,6 +12,8 @@ interface IRow {
 }
 
 function TaskGrid() {
+    const [rowData, setRowData] = useState<IRow[]>([]);
+
     const [colDefs, setColDefs] = useState<ColDef<IRow>[]>([
         { headerName: "Title", field: "title" },
         { headerName: "Category", field: "category" },
@@ -20,12 +22,9 @@ function TaskGrid() {
     ]);
 
     const defaultColDef: ColDef = {
+        filter: true,
         flex: 1,
     };
-
-    const [rowData, setRowData] = useState<IRow[]>([
-        /* TODO: Task data goes here */
-    ]);
 
     const [isRefreshing, setIsRefreshing] = useState(true);
 
