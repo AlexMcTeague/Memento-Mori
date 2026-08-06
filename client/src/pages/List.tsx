@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import TaskForm from "../components/TaskForm";
+import TaskForm from '../components/TaskForm';
 import TaskGrid from '../components/TaskGrid';
+import '../css/list.css'
 
 function App() {
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -16,12 +17,12 @@ function App() {
 
     return (
         <>
-            <h1>Task List</h1>
-            <button className="new-task-button" disabled={isFormVisible} onClick={openNewForm}>{isFormVisible ? "Editing New Task" : "New Task"}</button>
+            <div className="list-page-container">
+                <h1>Task List</h1>
+                <button className="new-task-button" disabled={isFormVisible} onClick={openNewForm}>{isFormVisible ? "Editing New Task" : "New Task"}</button>
 
-            <TaskGrid />
+                <TaskGrid />
 
-            <div className="form-container">
                 <TaskForm isVisible={isFormVisible} closeForm={closeForm} />
             </div>
         </>
