@@ -14,7 +14,7 @@ interface IRow {
 function TaskGrid() {
     const [rowData, setRowData] = useState<IRow[]>([]);
 
-    const [colDefs, setColDefs] = useState<ColDef<IRow>[]>([
+    const [colDefs] = useState<ColDef<IRow>[]>([
         { headerName: "Title", field: "title" },
         { headerName: "Category", field: "category" },
         { headerName: "Due Date", field: "dueDate" },
@@ -26,19 +26,18 @@ function TaskGrid() {
         flex: 1,
     };
 
-    const [isRefreshing, setIsRefreshing] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (isRefreshing) {
-            refreshGrid();
-            setIsRefreshing(false);
-        }
-    }, [isRefreshing]);
+        refreshGrid();
+    }, []);
 
     async function refreshGrid() {
         // Backend URL setup
         const backendPort = import.meta.env.BACKEND_PORT || 8080;
         const backendUrl = `http://localhost:${backendPort}/api/tasks`;
+
+        setIsLoading(true);
 
         try {
             const response = await fetch(backendUrl, {
@@ -71,7 +70,9 @@ function TaskGrid() {
 
             // Update the grid with the retrieved data
             setRowData(rows);
+            setIsLoading(false);
         } catch (error) {
+            setIsLoading(false);
             // TODO: Show a notification that the data could not be retrieved
         }
     }
@@ -83,6 +84,13 @@ function TaskGrid() {
                     rowData={rowData}
                     columnDefs={colDefs}
                     defaultColDef={defaultColDef}
+                    loading={isLoading}
+                    overlayLoadingTemplate={
+                        `<div class="ag-overlay-loading-center">
+                        <span class="ag-icon ag-icon-loading" style="margin: 0" aria-hidden="true"></span>
+                        <span style="margin-left: 8px;">Fetching Tasks...</span>
+                        </div>`
+                    }
                 />
             </div>
         </AgGridProvider>
