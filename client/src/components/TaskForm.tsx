@@ -7,7 +7,7 @@ type FormFields = {
     Category: string;
     Description: string;
     DueDate: Date;
-    Doom: number;
+    Doom: string;
 }
 
 type TaskFormProps = {
@@ -26,7 +26,8 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
         formState: { errors, isSubmitting }
     } = useForm<FormFields>({
         defaultValues: {
-            Category: ""
+            Category: "",
+            Doom: "1"
         }
     });
 
@@ -37,12 +38,17 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
     // Handle form submission
     const onSubmit = async (data: FormFields) => {
         try {
+            const payload = {
+                ...data,
+                Doom: Number(data.Doom),
+            };
+
             const response = await fetch(backendUrl, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(payload)
             });
 
             if (!response.ok) {
@@ -121,18 +127,16 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
                     <div id="doom-form-row" className="form-row">
                         <label htmlFor="doom-field">Doom</label>
                         <div id="doom-field">
-                            {/* TODO: Allow user to "unselect" a radio button */}
-                            {/* TODO: Figure out labeling for radio buttons*/}
                             <label htmlFor="doom-1">1</label>
-                            <input {...register("Doom")} id="doom-1" type="radio" value="1" />
+                            <input {...register("Doom", { required: "Doom is Required" })} id="doom-1" type="radio" value="1" />
                             <label htmlFor="doom-2">2</label>
-                            <input {...register("Doom")} id="doom-2" type="radio" value="2" />
+                            <input {...register("Doom", { required: "Doom is Required" })} id="doom-2" type="radio" value="2" />
                             <label htmlFor="doom-3">3</label>
-                            <input {...register("Doom")} id="doom-3" type="radio" value="3" />
+                            <input {...register("Doom", { required: "Doom is Required" })} id="doom-3" type="radio" value="3" />
                             <label htmlFor="doom-4">4</label>
-                            <input {...register("Doom")} id="doom-4" type="radio" value="4" />
+                            <input {...register("Doom", { required: "Doom is Required" })} id="doom-4" type="radio" value="4" />
                             <label htmlFor="doom-5">5</label>
-                            <input {...register("Doom")} id="doom-5" type="radio" value="5" />
+                            <input {...register("Doom", { required: "Doom is Required" })} id="doom-5" type="radio" value="5" />
                         </div>
                         {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
                     </div>
