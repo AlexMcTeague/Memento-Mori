@@ -123,11 +123,16 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
                         <div id="doom-field">
                             {/* TODO: Allow user to "unselect" a radio button */}
                             {/* TODO: Figure out labeling for radio buttons*/}
-                            <input {...register("Doom")} type="radio" value="1" />
-                            <input {...register("Doom")} type="radio" value="2" />
-                            <input {...register("Doom")} type="radio" value="3" />
-                            <input {...register("Doom")} type="radio" value="4" />
-                            <input {...register("Doom")} type="radio" value="5" />
+                            <label htmlFor="doom-1">1</label>
+                            <input {...register("Doom")} id="doom-1" type="radio" value="1" />
+                            <label htmlFor="doom-2">2</label>
+                            <input {...register("Doom")} id="doom-2" type="radio" value="2" />
+                            <label htmlFor="doom-3">3</label>
+                            <input {...register("Doom")} id="doom-3" type="radio" value="3" />
+                            <label htmlFor="doom-4">4</label>
+                            <input {...register("Doom")} id="doom-4" type="radio" value="4" />
+                            <label htmlFor="doom-5">5</label>
+                            <input {...register("Doom")} id="doom-5" type="radio" value="5" />
                         </div>
                         {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
                     </div>

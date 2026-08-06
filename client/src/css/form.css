@@ -14,7 +14,7 @@
 
 .form-popup {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 2000;
   width: min(100%, 30rem);
@@ -23,6 +23,9 @@
   border: 1px solid var(--border);
   border-radius: 1rem;
   box-shadow: var(--shadow);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .task-form {
@@ -66,12 +69,18 @@ h1 {
   resize: vertical;
 }
 
+#doom-field {
+  display: flex;
+  flex-direction: row;
+}
+
 .form-buttons {
   display: flex;
   width: 100%;
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 .form-buttons button {
