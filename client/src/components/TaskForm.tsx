@@ -67,76 +67,81 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
 
     // Render the form
     return (
-        <form className="task-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-row">
-                <label htmlFor="title-field">Title</label>
-                <input
-                    id="title-field"
-                    {...register("Title", {
-                        required: "Title is required",
-                        maxLength: { value: 50, message: "Maximum 50 characters allowed" },
-                        /* Example of custom validation
-                        validate: (value) => {
-                            if (!value.includes("@")) {
-                                return "Email must contain an '@' symbol";
-                            }
-                            return true;
-                        }
-                        */
-                    })}
-                    type="text"
-                    placeholder="Title"
-                />
-                {errors.Title && <span className="error-msg">{errors.Title.message}</span>}
-            </div>
+        <div className="form-overlay">
+            <div className="form-popup" role="dialog" aria-modal="true">
+                <form className="task-form" onSubmit={handleSubmit(onSubmit)}>
+                    <h1>New Task</h1>
+                    <div className="form-row">
+                        <label htmlFor="title-field">Title</label>
+                        <input
+                            id="title-field"
+                            {...register("Title", {
+                                required: "Title is required",
+                                maxLength: { value: 50, message: "Maximum 50 characters allowed" },
+                                /* Example of custom validation
+                                validate: (value) => {
+                                    if (!value.includes("@")) {
+                                        return "Email must contain an '@' symbol";
+                                    }
+                                    return true;
+                                }
+                                */
+                            })}
+                            type="text"
+                            placeholder="Title"
+                        />
+                        {errors.Title && <span className="error-msg">{errors.Title.message}</span>}
+                    </div>
 
-            <div className="form-row">
-                <label htmlFor="category-field">Category</label>
-                <select {...register("Category")} id="category-field">
-                    <option value="">-- Select a Category --</option>
-                    <option value="Health">Health</option>
-                    <option value="Home">Home</option>
-                    <option value="Job">Job</option>
-                    <option value="Groceries">Groceries</option>
-                    <option value="Fun">Fun</option>
-                </select>
-                {errors.Category && <span className="error-msg">{errors.Category.message}</span>}
-            </div>
+                    <div className="form-row">
+                        <label htmlFor="category-field">Category</label>
+                        <select {...register("Category")} id="category-field">
+                            <option value="">-- Select a Category --</option>
+                            <option value="Health">Health</option>
+                            <option value="Home">Home</option>
+                            <option value="Job">Job</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Fun">Fun</option>
+                        </select>
+                        {errors.Category && <span className="error-msg">{errors.Category.message}</span>}
+                    </div>
 
-            <div className="form-row">
-                <label htmlFor="description-field">Description</label>
-                <textarea {...register("Description")} id="description-field" placeholder="Description" />
-                {errors.Description && <span className="error-msg">{errors.Description.message}</span>}
-            </div>
+                    <div className="form-row">
+                        <label htmlFor="description-field">Description</label>
+                        <textarea {...register("Description")} id="description-field" placeholder="Description" />
+                        {errors.Description && <span className="error-msg">{errors.Description.message}</span>}
+                    </div>
 
-            <div className="form-row">
-                <label htmlFor="due-date-field">Due Date</label>
-                <input {...register("DueDate")} id="due-date-field" type="datetime-local" />
-                {errors.DueDate && <span className="error-msg">{errors.DueDate.message}</span>}
-            </div>
+                    <div className="form-row">
+                        <label htmlFor="due-date-field">Due Date</label>
+                        <input {...register("DueDate")} id="due-date-field" type="datetime-local" />
+                        {errors.DueDate && <span className="error-msg">{errors.DueDate.message}</span>}
+                    </div>
 
-            <div id="doom-form-row" className="form-row">
-                <label htmlFor="doom-field">Doom</label>
-                <div id="doom-field">
-                    {/* TODO: Allow user to "unselect" a radio button */}
-                    {/* TODO: Figure out labeling for radio buttons*/}
-                    <input {...register("Doom")} type="radio" value="1" />
-                    <input {...register("Doom")} type="radio" value="2" />
-                    <input {...register("Doom")} type="radio" value="3" />
-                    <input {...register("Doom")} type="radio" value="4" />
-                    <input {...register("Doom")} type="radio" value="5" />
-                </div>
-                {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
-            </div>
+                    <div id="doom-form-row" className="form-row">
+                        <label htmlFor="doom-field">Doom</label>
+                        <div id="doom-field">
+                            {/* TODO: Allow user to "unselect" a radio button */}
+                            {/* TODO: Figure out labeling for radio buttons*/}
+                            <input {...register("Doom")} type="radio" value="1" />
+                            <input {...register("Doom")} type="radio" value="2" />
+                            <input {...register("Doom")} type="radio" value="3" />
+                            <input {...register("Doom")} type="radio" value="4" />
+                            <input {...register("Doom")} type="radio" value="5" />
+                        </div>
+                        {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
+                    </div>
 
-            <div className="form-buttons">
-                {errors.root && <span className="error-msg">{errors.root.message}</span>}
-                <button type="button" onClick={() => { reset(); closeForm(); }}>Cancel</button>
-                <button disabled={isSubmitting} type="submit">
-                    {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
+                    <div className="form-buttons">
+                        {errors.root && <span className="error-msg">{errors.root.message}</span>}
+                        <button type="button" onClick={() => { reset(); closeForm(); }}>Cancel</button>
+                        <button disabled={isSubmitting} type="submit">
+                            {isSubmitting ? "Submitting..." : "Submit"}
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     );
 }
 

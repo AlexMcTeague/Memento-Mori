@@ -1,8 +1,39 @@
+.form-overlay {
+  /* Covers the screen at a lower z-index than the popup
+  Essentially this blocks interaction to anything behind the popup */
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  width: 100%;
+  z-index: 1999;
+}
+
+.form-popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  width: min(100%, 30rem);
+  margin: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
 .task-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+}
+
+h1 {
+  align-self: center;
 }
 
 .form-row {
