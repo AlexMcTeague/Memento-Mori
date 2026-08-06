@@ -52,6 +52,11 @@
   }
 }
 
+.ag-div {
+  --ag-background-color: var(--code-bg);
+  --ag-foreground-color: var(--text);
+} 
+
 #root {
   max-width: 100%;
   margin: 0 auto;

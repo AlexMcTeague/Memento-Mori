@@ -87,7 +87,7 @@ function TaskGrid() {
 
     return (
         <AgGridProvider modules={[AllCommunityModule]}>
-            <div style={{ width: "100%", height: "100%" }}>
+            <div className="ag-div" style={{ width: "100%", height: "100%" }}>
                 <AgGridReact
                     rowData={rowData}
                     columnDefs={colDefs}

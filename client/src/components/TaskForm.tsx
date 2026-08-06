@@ -19,11 +19,11 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
 
     // React Hook Form setup
     const {
-        register, 
+        register,
         handleSubmit,
         reset,
         setError,
-        formState: { errors, isSubmitting } 
+        formState: { errors, isSubmitting }
     } = useForm<FormFields>({
         defaultValues: {
             Category: ""
@@ -33,7 +33,7 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
     // Backend URL setup
     const backendPort = import.meta.env.BACKEND_PORT || 8080;
     const backendUrl = `http://localhost:${backendPort}/api/tasks`;
-    
+
     // Handle form submission
     const onSubmit = async (data: FormFields) => {
         try {
@@ -56,7 +56,7 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
             reset();
             closeForm(); // Calls the parent's closeForm since the method was passed as an arg
         } catch (error) {
-            setError("root", { type: "manual", message: "Error submitting form"});
+            setError("root", { type: "manual", message: "Error submitting form" });
         }
     }
 
@@ -64,16 +64,16 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
     if (!isVisible) {
         return null;
     }
-  
+
     // Render the form
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label htmlFor="title-field">Title: </label>
+        <form className="task-form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-row">
+                <label htmlFor="title-field">Title</label>
                 <input
                     id="title-field"
                     {...register("Title", {
-                        required: "Title is required", 
+                        required: "Title is required",
                         maxLength: { value: 50, message: "Maximum 50 characters allowed" },
                         /* Example of custom validation
                         validate: (value) => {
@@ -90,8 +90,8 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
                 {errors.Title && <span className="error-msg">{errors.Title.message}</span>}
             </div>
 
-            <div>
-                <label htmlFor="category-field">Category: </label>
+            <div className="form-row">
+                <label htmlFor="category-field">Category</label>
                 <select {...register("Category")} id="category-field">
                     <option value="">-- Select a Category --</option>
                     <option value="Health">Health</option>
@@ -103,36 +103,38 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
                 {errors.Category && <span className="error-msg">{errors.Category.message}</span>}
             </div>
 
-            <div>
-                <label htmlFor="description-field">Description: </label>
+            <div className="form-row">
+                <label htmlFor="description-field">Description</label>
                 <textarea {...register("Description")} id="description-field" placeholder="Description" />
                 {errors.Description && <span className="error-msg">{errors.Description.message}</span>}
             </div>
 
-            <div>
-                <label htmlFor="due-date-field">Due Date: </label>
+            <div className="form-row">
+                <label htmlFor="due-date-field">Due Date</label>
                 <input {...register("DueDate")} id="due-date-field" type="datetime-local" />
                 {errors.DueDate && <span className="error-msg">{errors.DueDate.message}</span>}
             </div>
 
-            <div>
-                { /* TODO: Allow user to "unselect" a radio button */ }
-                <label htmlFor="doom-field">Doom: </label> {/* TODO: Figure out labeling for radio buttons*/}
-                <input {...register("Doom")} type="radio" value="1" />
-                <input {...register("Doom")} type="radio" value="2" />
-                <input {...register("Doom")} type="radio" value="3" />
-                <input {...register("Doom")} type="radio" value="4" />
-                <input {...register("Doom")} type="radio" value="5" />
+            <div id="doom-form-row" className="form-row">
+                <label htmlFor="doom-field">Doom</label>
+                <div id="doom-field">
+                    {/* TODO: Allow user to "unselect" a radio button */}
+                    {/* TODO: Figure out labeling for radio buttons*/}
+                    <input {...register("Doom")} type="radio" value="1" />
+                    <input {...register("Doom")} type="radio" value="2" />
+                    <input {...register("Doom")} type="radio" value="3" />
+                    <input {...register("Doom")} type="radio" value="4" />
+                    <input {...register("Doom")} type="radio" value="5" />
+                </div>
                 {errors.Doom && <span className="error-msg">{errors.Doom.message}</span>}
             </div>
 
-            <button type="button" onClick={() => {reset(); closeForm();}}>Cancel</button>
-            <button disabled={isSubmitting} type="submit">
-                {isSubmitting ? "Submitting..." : "Submit"}
-            </button>
-            
-            <div>
+            <div className="form-buttons">
                 {errors.root && <span className="error-msg">{errors.root.message}</span>}
+                <button type="button" onClick={() => { reset(); closeForm(); }}>Cancel</button>
+                <button disabled={isSubmitting} type="submit">
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
             </div>
         </form>
     );

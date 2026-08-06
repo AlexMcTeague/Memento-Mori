@@ -1,8 +1,54 @@
-form {
+.task-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  align-items: start;
+  width: 100%;
+  gap: 0.75rem;
+}
+
+.form-row label {
+  padding-top: 0.35rem;
+  justify-self: start;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font: inherit;
+  box-sizing: border-box;
+  /* TODO: Change the border color when field is highlighted */
+}
+
+.form-row textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.form-buttons button {
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent)
 }
 
 .error-msg {
