@@ -5,6 +5,7 @@ import '../css/list.css'
 
 function App() {
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const [refreshTracker, setRefreshTracker] = useState(0);
 
     const openNewForm = () => {
         setIsFormVisible(true);
@@ -12,8 +13,11 @@ function App() {
 
     const closeForm = () => {
         setIsFormVisible(false);
-        { /* TODO: Refresh the grid to show changes from the form */ }
     };
+
+    const refreshGrid = () => {
+        setRefreshTracker((current) => current + 1);
+    }
 
     return (
         <>
@@ -21,9 +25,9 @@ function App() {
                 <h1>Task List</h1>
                 <button className="new-task-button" disabled={isFormVisible} onClick={openNewForm}>{isFormVisible ? "Editing New Task" : "New Task"}</button>
 
-                <TaskGrid />
+                <TaskGrid refreshTracker={refreshTracker} />
 
-                <TaskForm isVisible={isFormVisible} closeForm={closeForm} />
+                <TaskForm isVisible={isFormVisible} closeForm={closeForm} refreshGrid={refreshGrid} />
             </div>
         </>
     )

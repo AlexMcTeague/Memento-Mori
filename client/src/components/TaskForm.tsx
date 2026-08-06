@@ -13,9 +13,10 @@ type FormFields = {
 type TaskFormProps = {
     isVisible: boolean;
     closeForm: () => void;
+    refreshGrid: () => void;
 }
 
-function TaskForm({ isVisible, closeForm }: TaskFormProps) {
+function TaskForm({ isVisible, closeForm, refreshGrid }: TaskFormProps) {
 
     // React Hook Form setup
     const {
@@ -61,6 +62,7 @@ function TaskForm({ isVisible, closeForm }: TaskFormProps) {
             // Reset the form
             reset();
             closeForm(); // Calls the parent's closeForm since the method was passed as an arg
+            refreshGrid(); // Likewise calls the parent's refreshGrid
         } catch (error) {
             setError("root", { type: "manual", message: "Error submitting form" });
         }

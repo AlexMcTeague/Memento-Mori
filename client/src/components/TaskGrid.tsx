@@ -11,7 +11,11 @@ interface IRow {
     doom: number;
 }
 
-function TaskGrid() {
+type TaskGridProps = {
+    refreshTracker: number;
+}
+
+function TaskGrid({ refreshTracker: refreshTracker }: TaskGridProps) {
     const [rowData, setRowData] = useState<IRow[]>([]);
 
     const [colDefs] = useState<ColDef<IRow>[]>([
@@ -29,9 +33,12 @@ function TaskGrid() {
     const [isLoading, setIsLoading] = useState(true);
     const [noRowsMessage, setNoRowsMessage] = useState('No rows to show.');
 
+    // By default, useEffect triggers every render. 
+    // By passing an array of objects to watch, useEffect will only trigger when one of those values changes.
+    // Passing an empty array tells useEffect to only run once on reload
     useEffect(() => {
-        refreshGrid();
-    }, []);
+        void refreshGrid();
+    }, [refreshTracker]);
 
     async function refreshGrid() {
         // Backend URL setup
