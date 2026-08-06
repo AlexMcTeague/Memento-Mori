@@ -27,6 +27,7 @@ function TaskGrid() {
     };
 
     const [isLoading, setIsLoading] = useState(true);
+    const [noRowsMessage, setNoRowsMessage] = useState('No rows to show.');
 
     useEffect(() => {
         refreshGrid();
@@ -38,6 +39,7 @@ function TaskGrid() {
         const backendUrl = `http://localhost:${backendPort}/api/tasks`;
 
         setIsLoading(true);
+        setNoRowsMessage('No rows to show.');
 
         try {
             const response = await fetch(backendUrl, {
@@ -72,6 +74,12 @@ function TaskGrid() {
             setRowData(rows);
             setIsLoading(false);
         } catch (error) {
+            setNoRowsMessage(
+                `<div style="color: #d32f2f; font-weight: bold; text-align: center;">
+                Failed to Fetch Tasks<br/>
+                <span style="font-size: 13px; color: #666; font-weight: normal;">${error}</span>
+            </div>`
+            );
             setIsLoading(false);
             // TODO: Show a notification that the data could not be retrieved
         }
@@ -91,6 +99,7 @@ function TaskGrid() {
                         <span style="margin-left: 8px;">Fetching Tasks...</span>
                         </div>`
                     }
+                    overlayNoRowsTemplate={noRowsMessage}
                 />
             </div>
         </AgGridProvider>
